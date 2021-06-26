@@ -9,7 +9,7 @@ import PageHeader from './components/PageHeader/PageHeader';
 import DataHeader from './components/DataHeader/DataHeader';
 
 // API VARIABLES
-const MY_API_KEY = "RGAPI-a20df8f6-e4ac-4319-929b-4ef6e711bece"
+const MY_API_KEY = "RGAPI-46147d72-e9df-4ebc-856c-6729eacbfbe8"
 const API_KEY = "api_key=" + MY_API_KEY
 
 const BY_PLAYER_NAME_ENDPOINT = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"
@@ -30,6 +30,8 @@ function App() {
   const [puuid, setPuuid] = useState("")
   const [id, setId] = useState("")
   const [soloQ, setSoloQ] = useState("")
+
+  const [playerIcon, setPlayerIcon] = useState('')
   
   const player = {
     matches,
@@ -63,6 +65,8 @@ function App() {
         tier: playerInfo[0].tier,
         leaguePoints: playerInfo[0].leaguePoints
       })
+
+      console.log(playerInfo[0])
       
       // GETTING MATCHES
       let startCount = 0
@@ -104,14 +108,16 @@ function App() {
 
       <div className="data-container flex-container">
           { matches ? (
-              <DataHeader playerName={searchPlayer} playerRank={soloQ.rank} playerTier={soloQ.tier} playerLeaguePoints={soloQ.leaguePoints} />
+              <DataHeader playerName={searchPlayer} playerRank={soloQ.rank} playerTier={soloQ.tier} playerLeaguePoints={soloQ.leaguePoints} playerIcon={playerIcon} />
             ) : (
               <p></p>
             )
           }
           <div>
             { matches ? (
-                <Matches puuid={player.puuid} matches={player.matches}/>
+                <DataContext.Provider value={{setPlayerIcon}}>
+                  <Matches puuid={player.puuid} matches={player.matches} />
+                </DataContext.Provider>
               ) : (
                 <p>No Player Being Searched...</p>
               )

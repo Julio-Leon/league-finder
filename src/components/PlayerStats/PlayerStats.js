@@ -5,7 +5,7 @@ export default function PlayerStats({champion , kdaRatio}) {
     return (
         <>  
             <div className="champion">
-                <img src={imgPath} width='80px' alt="" />
+                <img src={imgPath} width='100px' alt="" />
             </div>
             <div className="player-KDA">
                 {kdaRatio[0]}/{kdaRatio[1]}/{kdaRatio[2]}

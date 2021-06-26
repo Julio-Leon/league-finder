@@ -2,12 +2,19 @@ import Items from "../Items/Items"
 import PlayerStats from "../PlayerStats/PlayerStats"
 import InGameStats from "../InGameStats/InGameStats"
 import Participants from "../Participants/Participants"
+import SummonerSpells from "../SummonerSpells/SummonerSpells"
+import { DataContext } from "../../App"
+import { useContext } from "react"
 
 export default function ({puuid, match}) {
 
     let win = 'Searching...'
 
+    const data = useContext(DataContext)
+
     const items = []
+
+    const summonerSpells = []
 
     let champion = ''
 
@@ -32,6 +39,11 @@ export default function ({puuid, match}) {
             inGameStats.level = participant.champLevel
             inGameStats.creepScore = participant.totalMinionsKilled
             inGameStats.goldEarned = participant.goldEarned
+            // Player Icon
+            data.setPlayerIcon(participant.profileIcon)
+            // Summoner Spells
+            summonerSpells.push(participant.summoner1Id)
+            summonerSpells.push(participant.summoner2Id)
         }
         // particants
         participants.push(
@@ -49,10 +61,17 @@ export default function ({puuid, match}) {
 
     console.log(match)
 
+    let styler = ''
+
+    if (win === 'Victory') styler = 'green'; else styler = 'red'
+
     return (
         <div className="match flex-container">
             <div className="player-stats flex-container">
                 <PlayerStats champion={champion} kdaRatio={kdaRatio} />
+            </div>
+            <div className="summoner-spells">
+                <SummonerSpells summonerSpells={summonerSpells} />
             </div>
             <div className='items'>
                 <Items items={items} />
@@ -60,10 +79,10 @@ export default function ({puuid, match}) {
             <div className="in-game-stats">
                 <InGameStats level={inGameStats.level} creepScore={inGameStats.creepScore} goldEarned={inGameStats.goldEarned} />
             </div>
-            {/* <div className="participants flex-container">
+            <div className="participants flex-container">
                 <Participants participants={participants} />
-            </div> */}
-            <div className="match-result">
+            </div>
+            <div className="match-result" style={{color: styler}}>
                 {win.toString()}
             </div>
         </div>

@@ -1,11 +1,14 @@
-export default function Participant() {
+export default function Participant({participant}) {
+
+    const imgPath = `./assets/champion/${participant.champion}.png`
+
     return (
         <div className='participant flex-container'>
             <div className="participant-champ">
-                X
+                <img src={imgPath} width='20px' alt="" />
             </div>
             <div className="participant-name">
-                participant
+                {participant.summoner}
             </div>
         </div>
     )
