@@ -5,7 +5,7 @@ export default function Participants({participants}) {
         <>
             {
                 participants.map((participant, i) => {
-                    return <Participant participant={participant} />
+                    return <Participant key={i} participant={participant} />
                 })
             }
         </>

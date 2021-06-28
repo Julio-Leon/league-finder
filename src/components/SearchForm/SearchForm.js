@@ -1,8 +1,7 @@
 import { useState } from 'react';
+import {Redirect} from 'react-router-dom'
 
-export default function ({setMatches, setPuuid, setSearchPlayer}) {
-
-    const [searchInput, setSearchInput] = useState("")
+export default function ({searchInput, setSearchInput, redirect, setRedirect}) {
 
     const handleInput = e => {
         e.preventDefault()
@@ -11,12 +10,11 @@ export default function ({setMatches, setPuuid, setSearchPlayer}) {
 
     const handleSubmit = e => {
         e.preventDefault()
-        setPuuid("")
-        setMatches("")
-        // console.log(searchInput)
-        setSearchPlayer(searchInput)
-        setSearchInput("")
+        setSearchInput("/" + searchInput)
+        setRedirect(true)
     }
+    
+    if (redirect) return <Redirect to={searchInput} />
 
     return (
         <form className="search-form flex-container" onSubmit={handleSubmit}>

@@ -1,5 +1,4 @@
 export default function InGameStats({level, creepScore, goldEarned}) {
-    console.log(creepScore)
     return (
         <>
             <div className="level">

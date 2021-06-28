@@ -5,7 +5,7 @@ export default function Items({items}) {
         <>
             {
                 items.map((item, i) => {
-                    return <Item item={item}/>
+                    return <Item key={i} item={item}/>
                 })
             }
         </>
