@@ -5,7 +5,9 @@ import { RedirectContext } from '../../App';
 import Matches from '../Matches/Matches';
 import DataHeader from '../DataHeader/DataHeader';
 
-const MY_API_KEY = "RGAPI-79849f97-8af7-45fd-8338-b985bd0c297c"
+require('dotenv').config();
+
+const MY_API_KEY = process.env.REACT_APP_MY_API_KEY
 const API_KEY = "api_key=" + MY_API_KEY
 
 const BY_PLAYER_NAME_ENDPOINT = "https://na1.api.riotgames.com/lol/summoner/v4/summoners/by-name/"
