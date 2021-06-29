@@ -41,6 +41,7 @@ function MatchGetter(props) {
     const getPlayerData = async () => {
         setMatches('')
         const playerName = player.searchPlayer + "?"
+        console.log(playerName)
         if (playerName === "?") {
           return
         }
@@ -55,23 +56,25 @@ function MatchGetter(props) {
     
           // GETTING ACCOUNT INFO
           const playerInfoResponse = await fetch(GET_SOLO_QUEUE_DATA_ENDPOINT + nameData.id + '?' + API_KEY)
-          if (playerInfoResponse.status === 404) redirectContext.setInvalidRedirect(true)
           const playerInfo = await playerInfoResponse.json()
     
             try {
                 setSoloQ({
-                rank: playerInfo[0].rank,
-                tier: playerInfo[0].tier,
-                leaguePoints: playerInfo[0].leaguePoints
+                  rank: playerInfo[0].rank,
+                  tier: playerInfo[0].tier,
+                  leaguePoints: playerInfo[0].leaguePoints
                 })
             } catch (err) {
-                redirectContext.setInvalidRedirect(true)
+                setSoloQ({
+                  rank: '-',
+                  leaguePoints: '-'
+                })
             }
           
           // GETTING MATCHES
           let startCount = 0
-          let endCount = 10
-          while (playerMatchesData.length < 10) {
+          let endCount = 30
+          while (playerMatchesData.length < 30) {
             const matchesIDsResponse = await fetch(GET_MATCHES_BY_PUUID_ENDPOINT_ONE + nameData.puuid + `/ids?start=${startCount.toString()}&count=${endCount.toString()}&` + API_KEY)
     
             // Gets array of matchesIDs(strings)

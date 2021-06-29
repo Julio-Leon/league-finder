@@ -68,7 +68,7 @@ export default function ({puuid, match}) {
 
     let styler = ''
 
-    if (win === 'Victory') styler = 'green'; else styler = 'red'
+    if (win === 'Victory') styler = 'darkgreen'; else styler = 'red'
 
     let infoStyler = 'none'
     

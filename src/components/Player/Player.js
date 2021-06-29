@@ -1,6 +1,17 @@
 import PlayerChampion from './PlayerChampion/PlayerChampion'
 import PlayerItems from './PlayerItems/PlayerItems'
 
+// Dark Mode
+// Different Languages
+// Fix Bug with Names and CS
+// Different Servers
+// Add Summoner Spells To Info Players
+
+// Home Page
+    // Trailer of game
+    // Big Input for Name
+    
+
 export default function Player({player}) {
 
     return (

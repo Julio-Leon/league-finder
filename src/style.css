@@ -40,6 +40,10 @@ body {
   font-size: 90px;
 }
 
+.league-finder:hover {
+  transform: scale(1.1);
+}
+
 .search-form {
   position: absolute;
   bottom: 20px;
@@ -84,7 +88,7 @@ body {
   overflow-y: scroll;
   overflow-x: hidden;
   height: 58vh;
-  background-color: #28578d;
+  background-color: rgba(95, 158, 160, 0.295);
 }
 
 .data-container * {
@@ -302,6 +306,7 @@ body {
   left: 10px;
   font-size: 25px;
   cursor: pointer;
+  color: coral;
 }
 
 .info-button:hover {

@@ -34,8 +34,8 @@ function App() {
       <RedirectContext.Provider value={{invalidRedirect, setInvalidRedirect, setSearchInput, searchInput, setRedirect, redirect}}>
         <main>
           <Route path='/' exact component={IntroPage} />
-          <Route path='/:name' component={MatchGetter} />
-          <Route path='/invalid-name' component={InvalidName} />
+          <Route path='/:name' exact component={MatchGetter} />
+          <Route path='/invalid-name' exact component={InvalidName} />
         </main>
       </RedirectContext.Provider>
 
