@@ -4,8 +4,7 @@ import PlayerSummonerSpells from './PlayerSummonerSpells/PlayerSummonerSpells'
 import { useContext } from 'react'
 import { RedirectContext } from '../../App'
 
-// Home Page
-    // Trailer of game
+// Fix player info participants
 
 export default function Player({player}) {
 
