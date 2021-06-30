@@ -89,6 +89,9 @@ export default function ({puuid, match}) {
         participantData.playerKDA.push(participant.assists)
         participantData.level = participant.champLevel
         participantData.creepScore = participant.totalMinionsKilled
+        participantData.summonerSpells = []
+        participantData.summonerSpells.push(participant.summoner1Id)
+        participantData.summonerSpells.push(participant.summoner2Id)
         players.push(participantData)
     })
 

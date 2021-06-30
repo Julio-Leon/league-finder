@@ -11,10 +11,6 @@
   font-family: "font";
 }
 
-body {
-  background-color: #192734;
-}
-
 .flex-container {
   display: flex;
 }
@@ -23,6 +19,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 100vh;
 }
 
 .header {
@@ -31,7 +28,6 @@ body {
   height: 160px;
   justify-content: center;
   align-items: center;
-  background-color: #eb7d7d;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
 }
@@ -51,6 +47,7 @@ body {
   width: 450px;
   height: 40px;
   justify-content: space-around;
+  align-items: center;
 }
 
 .search-form * {
@@ -58,7 +55,7 @@ body {
 }
 
 .search-player-label {
-  display: none;
+  font-size: 30px;
 }
 
 .search-player,
@@ -68,7 +65,7 @@ body {
 }
 
 .search-player {
-  width: 70%;
+  width: 60%;
   opacity: 0.5;
 }
 
@@ -100,7 +97,7 @@ body {
   font-size: 50px;
   justify-content: space-around;
   align-items: center;
-  background-color: teal;
+  background-color: rgba(0, 128, 128, 0.7);
   border-top: black 1px solid;
   position: relative;
 }
@@ -120,7 +117,7 @@ body {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  background-color: coral;
+  background-color: rgba(255, 127, 80, 0.7);
   padding-top: 10px;
 }
 
@@ -137,7 +134,6 @@ body {
 
 .item {
   font-size: 20px;
-  color: black;
   width: 24%;
   height: 49%;
 }
@@ -230,17 +226,12 @@ body {
 }
 
 ::-webkit-scrollbar {
-  background-color: rgba(240, 240, 240, 0.1);
   border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: coral;
+  background-color: rgba(255, 127, 80, 0.7);
   border-radius: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #192734;
 }
 
 @keyframes display-info {
@@ -295,10 +286,12 @@ body {
 
 .player-info-kda {
   width: 55px;
+  margin-left: 10px;
 }
 
 .player-info-cs {
   width: 55px;
+  margin-left: 5px;
 }
 
 .info-button {
@@ -306,25 +299,31 @@ body {
   left: 10px;
   font-size: 25px;
   cursor: pointer;
-  color: coral;
+  color: rgba(255, 127, 80, 0.7);
 }
 
 .info-button:hover {
   transform: scale(1.2) translateX(17.5px);
 }
 
-.invalid-name,
+.invalid-name {
+  margin: 150px;
+  margin-bottom: 565px;
+  font-size: 40px;
+  color: white;
+}
+
 .searching {
   margin: 150px;
-  margin-bottom: 500px;
-  font-size: 40px !important;
+  margin-bottom: 492px;
+  font-size: 40px;
   color: white;
 }
 
 .no-player-search {
   font-size: 40px;
   margin: 150px;
-  margin-bottom: 550px;
+  margin-bottom: 565px;
   color: white;
 }
 
@@ -342,9 +341,9 @@ body {
 
 .insert-name {
   position: absolute;
-  right: 170px;
+  right: 110px;
   top: 200px;
-  color: coral;
+  color: rgba(255, 127, 80, 0.7);
   font-size: 20px;
   animation: insertName 1s linear infinite;
   background-color: black;
@@ -354,4 +353,120 @@ body {
 
 .link-home {
   color: black;
+}
+
+.player-info-spells {
+  flex-direction: column;
+  margin-left: 5px;
+}
+
+.player-info-summoner-one img,
+.player-info-summoner-two img {
+  border: black 1px solid;
+}
+
+.server-picker {
+  width: 22%;
+  position: absolute;
+  justify-content: space-between;
+  right: 50px;
+  top: 170px;
+}
+
+.server-picker > * {
+  font-size: 20px;
+  color: white;
+  cursor: pointer;
+}
+
+.server-picker > *:hover {
+  transform: scale(1.2);
+}
+
+.cors-alert-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 99vh;
+  width: 99vw;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.cors-alert {
+  background-color: coral;
+  height: 200px;
+  width: 500px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.cors-failed {
+  font-size: 35px;
+  margin-top: -20px;
+  margin-bottom: 30px;
+}
+
+.install-cors {
+  font-size: 22px;
+  margin-left: 35px;
+  margin-right: 35px;
+}
+
+a {
+  margin-left: 10px;
+}
+
+/* DARK MODE BUTTON(credits to Narender Saini) */
+
+.button-holder {
+  position: absolute;
+  left: 30px;
+  top: 20px;
+  align-items: center;
+  justify-content: space-around;
+  width: 170px;
+}
+
+.toggle-container {
+  width: 70px;
+  background-color: #c4c4c4;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 25px;
+  padding: 2px;
+  height: 32px;
+  position: relative;
+}
+
+.dialog-button {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #002b49;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 18px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  min-width: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 38px;
+  min-width: unset;
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  left: 34px;
+  transition: all 0.3s ease;
+}
+
+.disabled {
+  background-color: #707070;
+  left: 2px;
 }
