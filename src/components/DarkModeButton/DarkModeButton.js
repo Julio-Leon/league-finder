@@ -14,7 +14,7 @@ export default function DarkModeButton() {
 
     return (
         <div className="button-holder flex-container">
-            <div style={{color: fontColor}}>
+            <div className='dark-mode-text' style={{color: fontColor}}>
                 Dark Mode:
             </div>
             <div className="toggle-container" onClick={() => darkModeData.setDarkModeOn(!darkModeData.darkModeOn)}>

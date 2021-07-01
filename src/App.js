@@ -20,7 +20,7 @@ function App() {
     na1: 'NA',
     br1: 'BR',
     eun1: 'EUN',
-    euw: 'EUW',
+    euw1: 'EUW',
     jp1: 'JP',
     kr: 'KR',
     la1: 'LAN',
