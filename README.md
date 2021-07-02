@@ -1,4 +1,4 @@
-League Finder
+LEAGUE FINDER
 
 Displays data about a League of Legends Account
 
