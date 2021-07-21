@@ -59,8 +59,9 @@ function MatchGetter(props) {
       const playerMatchesData = []
       try {
           redirectContext.setCorsFailed(false)
+          
           const nameResponse = await fetch(BY_PLAYER_NAME_ENDPOINT_START + redirectContext.server + BY_PLAYER_NAME_ENDPOINT_END + playerName + API_KEY)
-          console.log(BY_PLAYER_NAME_ENDPOINT_START + redirectContext.server + BY_PLAYER_NAME_ENDPOINT_END + playerName + API_KEY)
+          
           if (nameResponse.status === 404) {
             redirectContext.setInvalidRedirect(true)
             return
