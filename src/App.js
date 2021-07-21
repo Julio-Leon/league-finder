@@ -12,6 +12,8 @@ import ServerPicker from './components/ServerPicker/ServerPicker';
 import CorsAlert from './components/CorsAlert/CorsAlert'
 import DarkModeButton from './components/DarkModeButton/DarkModeButton';
 
+import riot from './riot/riot';
+
 export const RedirectContext = createContext()
 
 function App() {
@@ -77,6 +79,7 @@ function App() {
           <Route path='/' exact component={IntroPage} />
           <Route path='/:name' exact component={MatchGetter} />
           <Route path='/invalid-name' exact component={InvalidName} />
+          <Route path='/riot.txt' exact component={riot} />
         </main>
 
       <footer  style={{backgroundColor: appBackgroundColor}}>
