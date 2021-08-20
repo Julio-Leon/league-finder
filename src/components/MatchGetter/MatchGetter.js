@@ -108,6 +108,7 @@ function MatchGetter(props) {
             endCount += 10
           }
           setMatches(playerMatchesData)
+          console.log(playerMatchesData)
         } catch (error) {
           redirectContext.setCorsFailed(true)
         }
