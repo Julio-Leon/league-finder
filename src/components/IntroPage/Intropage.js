@@ -17,9 +17,9 @@ export default function IntroPage() {
             <div className='no-player-search' style={{color: fontColor}}>
                 No player being searched!
             </div>
-            <div className='insert-name'>
+            {/* <div className='insert-name'>
                 Insert name above to get games
-            </div>
+            </div> */}
         </div>
     )
 }
