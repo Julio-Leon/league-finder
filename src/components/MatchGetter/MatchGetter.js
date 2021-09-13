@@ -50,6 +50,7 @@ function MatchGetter(props) {
     }
 
     const fetchPlayerData = async () => {
+      // const PLAYER_ENDPOINT = 'http://localhost:4000/'
       const PLAYER_ENDPOINT = 'https://young-shore-86765.herokuapp.com/'
       try {
         const playerResponse = await fetch(PLAYER_ENDPOINT + redirectContext.server + '/' + player.searchPlayer)
