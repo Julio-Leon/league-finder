@@ -7,7 +7,7 @@ import { DataContext } from "../MatchGetter/MatchGetter"
 import { useState, useContext } from "react"
 import CompleteMatchInfo from "../CompleteMatchInfo/CompleteMatchInfo"
 
-export default function ({puuid, match}) {
+export default function Match({puuid, match}) {
 
     const [showInfo, setShowInfo] = useState(false)
 

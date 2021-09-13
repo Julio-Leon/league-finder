@@ -26,7 +26,7 @@ export const DataContext = createContext()
 
 function MatchGetter(props) {
 
-    const [matches, setMatches] = useState("")
+    const [matches, setMatches] = useState(false)
     const [puuid, setPuuid] = useState("")
     const [id, setId] = useState("")
     const [soloQ, setSoloQ] = useState("")
@@ -47,6 +47,22 @@ function MatchGetter(props) {
       searchingColor = 'white'
     } else {
       searchingColor = 'black'
+    }
+
+    const fetchPlayerData = async () => {
+      const PLAYER_ENDPOINT = 'https://young-shore-86765.herokuapp.com/'
+      try {
+        const playerResponse = await fetch(PLAYER_ENDPOINT + redirectContext.server + '/' + player.searchPlayer)
+        const playerData = await playerResponse.json()
+        console.log(playerData)
+        setId(playerData.id)
+        setPuuid(playerData.puuid)
+        setSoloQ(playerData.soloQ)
+        setMatches(playerData.matches)
+        console.log(playerData.matches)
+      } catch (error) {
+        console.error(error)
+      }
     }
 
     const getPlayerData = async () => {
@@ -108,13 +124,14 @@ function MatchGetter(props) {
             endCount += 10
           }
           setMatches(playerMatchesData)
+          console.log(playerMatchesData)
         } catch (error) {
           redirectContext.setCorsFailed(true)
         }
       }
     
       useEffect(() => {
-        getPlayerData()
+        fetchPlayerData()
       }, [player.searchPlayer, redirectContext.server])
     
       if (redirectContext.invalidRedirect) return <Redirect to='invalid-name' />
