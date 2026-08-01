@@ -1,53 +1,67 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { RedirectContext } from "../../App"
 
 export default function ServerPicker() {
 
     const serverData = useContext(RedirectContext)
-
-    const onClickNA1 = () => {
-        serverData.setServer('na1')
+   
+    const onClickAmerica = () => {
+        serverData.setServer('americas')
     }
 
-    const onClickBR1 = () => {
-        serverData.setServer('br1')
+    const onClickEurope = () => {
+        serverData.setServer('europe')
     }
 
-    const onClickEUN1 = () => {
-        serverData.setServer('eun1')
+    const onClickAsia = () => {
+        serverData.setServer('asia')
     }
 
-    const onClickEUW1 = () => {
-        serverData.setServer('euw1')
-    }
 
-    const onClickJP1 = () => {
-        serverData.setServer('jp1')
-    }
+    // ***FOR V5 USE***
+    // const onClickNA1 = () => {
+    //     serverData.setServer('na1')
+    // }
 
-    const onClickKR = () => {
-        serverData.setServer('kr')
-    }
+    // const onClickBR1 = () => {
+    //     serverData.setServer('br1')
+    // }
 
-    const onClickLA1 = () => {
-        serverData.setServer('la1')
-    }
+    // const onClickEUN1 = () => {
+    //     serverData.setServer('eun1')
+    // }
 
-    const onClickLA2 = () => {
-        serverData.setServer('la2')
-    }
+    // const onClickEUW1 = () => {
+    //     serverData.setServer('euw1')
+    // }
 
-    const onClickOC1 = () => {
-        serverData.setServer('oc1')
-    }
+    // const onClickJP1 = () => {
+    //     serverData.setServer('jp1')
+    // }
 
-    const onClickRU = () => {
-        serverData.setServer('ru')
-    }
+    // const onClickKR = () => {
+    //     serverData.setServer('kr')
+    // }
 
-    const onClickTR1 = () => {
-        serverData.setServer('tr1')
-    }
+    // const onClickLA1 = () => {
+    //     serverData.setServer('la1')
+    // }
+
+    // const onClickLA2 = () => {
+    //     serverData.setServer('la2')
+    // }
+
+    // const onClickOC1 = () => {
+    //     serverData.setServer('oc1')
+    // }
+
+    // const onClickRU = () => {
+    //     serverData.setServer('ru')
+    // }
+
+    // const onClickTR1 = () => {
+    //     serverData.setServer('tr1')
+    // }
 
     let fontColor = ''
     if (serverData.darkModeOn) {
@@ -58,7 +72,10 @@ export default function ServerPicker() {
 
     return (
         <div className="server-picker flex-container">
-            <div onClick={onClickNA1} style={{color: fontColor}}>NA</div>
+            <div onClick={onClickAmerica} style={{color: serverData.server === 'americas' ? 'blue' : fontColor}}>America</div>
+            <div onClick={onClickEurope} style={{color: serverData.server === 'europe' ? 'blue' : fontColor}}>Europe</div>
+            <div onClick={onClickAsia} style={{color: serverData.server === 'asia' ? 'blue' : fontColor}}>Asia</div>
+            {/* <div onClick={onClickNA1} style={{color: fontColor}}>NA</div>
             <div onClick={onClickBR1} style={{color: fontColor}}>BR</div>
             <div onClick={onClickEUN1} style={{color: fontColor}}>EUN</div>
             <div onClick={onClickEUW1} style={{color: fontColor}}>EUW</div>
@@ -68,7 +85,7 @@ export default function ServerPicker() {
             <div onClick={onClickLA2} style={{color: fontColor}}>LAS</div>
             <div onClick={onClickOC1} style={{color: fontColor}}>OC</div>
             <div onClick={onClickRU} style={{color: fontColor}}>RU</div>
-            <div onClick={onClickTR1} style={{color: fontColor}}>TR</div>
+            <div onClick={onClickTR1} style={{color: fontColor}}>TR</div> */}
         </div>
     )
 }

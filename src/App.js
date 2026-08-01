@@ -16,36 +16,50 @@ export const RedirectContext = createContext()
 
 function App() {
 
+  // ***FOR V5 USE***
+  // const servers = {
+  //   na1: 'NA',
+  //   br1: 'BR',
+  //   eun1: 'EUN',
+  //   euw1: 'EUW',
+  //   jp1: 'JP',
+  //   kr: 'KR',
+  //   la1: 'LAN',
+  //   la2: 'LAS',
+  //   oc1: 'OC',
+  //   ru: 'RU',
+  //   tr1: 'TR'
+  // }
+
   const servers = {
-    na1: 'NA',
-    br1: 'BR',
-    eun1: 'EUN',
-    euw1: 'EUW',
-    jp1: 'JP',
-    kr: 'KR',
-    la1: 'LAN',
-    la2: 'LAS',
-    oc1: 'OC',
-    ru: 'RU',
-    tr1: 'TR'
+    americas: 'Americas',
+    europe: 'Europe',
+    asia: 'Asia'
   }
 
   const [darkModeOn, setDarkModeOn] = useState(false)
   
-  const [searchInput, setSearchInput] = useState("")
+  const [searchInput, setSearchInput] = useState({name: '', tag: ''})
   const [redirect, setRedirect] = useState(false)
 
-  const [server, setServer] = useState('na1')
+  // ***FOR V5 USE***
+  // const [server, setServer] = useState('na1')
+
+  const [server, setServer] = useState('americas')
 
   const [corsFailed, setCorsFailed] = useState(false)
 
   const [invalidRedirect, setInvalidRedirect] = useState(false)
 
   useEffect(() => {
-    setSearchInput('')
+    setSearchInput({name: '', tag: ''})
     setRedirect(false)
     setInvalidRedirect(false)
   }, [redirect])
+
+  useEffect(() => {
+    console.log(server)
+  }, [server])
 
   let appBackgroundColor = ''
   if (darkModeOn) {
@@ -63,7 +77,7 @@ function App() {
 
   return (
     <div className="App flex-container" style={{backgroundColor: appBackgroundColor}}>
-      <RedirectContext.Provider value={{invalidRedirect, setInvalidRedirect, setSearchInput, searchInput, setRedirect, redirect, server, setServer, corsFailed, setCorsFailed, darkModeOn, setDarkModeOn, servers}}>
+      <RedirectContext.Provider value={{server, setServer, invalidRedirect, setInvalidRedirect, setSearchInput, searchInput, setRedirect, redirect, corsFailed, setCorsFailed, darkModeOn, setDarkModeOn}}>
 
       <header>
         <Route path='/' render={() => <PageHeader searchInput={searchInput} setSearchInput={setSearchInput} redirect={redirect} setRedirect={setRedirect} />} />
@@ -75,7 +89,7 @@ function App() {
           <DarkModeButton />
           <ServerPicker />
           <Route path='/' exact component={IntroPage} />
-          <Route path='/:name' exact component={MatchGetter} />
+          <Route path='/:name/:tag' exact component={MatchGetter} />
           <Route path='/invalid-name' exact component={InvalidName} />
         </main>
 

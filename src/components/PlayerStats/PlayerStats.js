@@ -1,11 +1,9 @@
 export default function PlayerStats({champion , kdaRatio}) {
 
-    const imgPath = `./assets/champion/${champion}.png`
-
     return (
         <>  
             <div className="champion">
-                <img src={imgPath} width='100px' alt="" />
+                <img src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion}_0.jpg`} width='100px' alt="" />
             </div>
             <div className="player-KDA">
                 {kdaRatio[0]}/{kdaRatio[1]}/{kdaRatio[2]}

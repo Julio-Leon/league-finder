@@ -15,45 +15,41 @@ export default function Match({puuid, match}) {
         showInfo ? setShowInfo(false) : setShowInfo(true)
     }
 
-    let win = 'Searching...'
+    const [playerMatches, setPlayerMatches] = useState({
+        win: 'Searching...',
+        items: [],
+        champion: '',
+        kdaRatio: [],
+        inGameStats: {},
+        summonerSpells: [],
+        participants: []
+    })
 
     const data = useContext(DataContext)
 
-    const items = []
-
-    const summonerSpells = []
-
-    let champion = ''
-
-    const kdaRatio = []
-
-    const inGameStats = {}
-
-    const participants = []
-
     match.info.participants.forEach((participant) => {
         if (participant.puuid === puuid) {
-            participant.win ? win = "Victory" : win = "Defeat"
+            playerMatches.win = participant.win ? "Victory" : "Defeat"
             for (let i = 0; i <= 6; i++) {
-                items.push(participant[`item${i}`])
+                playerMatches.items.push(participant[`item${i}`])
             }
-            champion = participant.championName
+            playerMatches.champion = participant.championName
             // KDA
-            kdaRatio.push(participant.kills)
-            kdaRatio.push(participant.deaths)
-            kdaRatio.push(participant.assists)
+            playerMatches.kdaRatio.push(participant.kills)
+            playerMatches.kdaRatio.push(participant.deaths)
+            playerMatches.kdaRatio.push(participant.assists)
             // Level, CS, gold
-            inGameStats.level = participant.champLevel
-            inGameStats.creepScore = participant.totalMinionsKilled
-            inGameStats.goldEarned = participant.goldEarned
+            playerMatches.inGameStats.level = participant.champLevel
+            playerMatches.inGameStats.creepScore = participant.totalMinionsKilled
+            playerMatches.inGameStats.goldEarned = participant.goldEarned
             // Player Icon
             data.setPlayerIcon(participant.profileIcon)
             // Summoner Spells
-            summonerSpells.push(participant.summoner1Id)
-            summonerSpells.push(participant.summoner2Id)
+            playerMatches.summonerSpells.push(participant.summoner1Id)
+            playerMatches.summonerSpells.push(participant.summoner2Id)
         }
         // participants
-        participants.push(
+        playerMatches.participants.push(
             {
                 champion: participant.championName,
                 summoner: participant.summonerName
@@ -62,13 +58,13 @@ export default function Match({puuid, match}) {
     })
 
     // Formatting Items Order
-    const temp = items[6]
-    items[6] = items[3]
-    items[3] = temp
+    const temp = playerMatches.items[6]
+    playerMatches.items[6] = playerMatches.items[3]
+    playerMatches.items[3] = temp
 
     let styler = ''
 
-    if (win === 'Victory') styler = 'darkgreen'; else styler = 'red'
+    if (playerMatches.win === 'Victory') styler = 'darkgreen'; else styler = 'red'
 
     let infoStyler = 'none'
     
@@ -95,26 +91,28 @@ export default function Match({puuid, match}) {
         players.push(participantData)
     })
 
+    console.log(players)
+
     return (
         <div className="match-container">
             <div className="match flex-container">
                 <div className="player-stats flex-container">
-                    <PlayerStats champion={champion} kdaRatio={kdaRatio} />
+                    <PlayerStats champion={playerMatches.champion} kdaRatio={playerMatches.kdaRatio} />
                 </div>
                 <div className="summoner-spells">
-                    <SummonerSpells summonerSpells={summonerSpells} />
+                    <SummonerSpells summonerSpells={playerMatches.summonerSpells} />
                 </div>
                 <div className='items'>
-                    <Items items={items} />
+                    <Items items={playerMatches.items} />
                 </div>
                 <div className="in-game-stats">
-                    <InGameStats level={inGameStats.level} creepScore={inGameStats.creepScore} goldEarned={inGameStats.goldEarned} />
+                    <InGameStats level={playerMatches.inGameStats.level} creepScore={playerMatches.inGameStats.creepScore} goldEarned={playerMatches.inGameStats.goldEarned} />
                 </div>
                 <div className="participants flex-container">
-                    <Participants participants={participants} />
+                    <Participants participants={playerMatches.participants} />
                 </div>
                 <div className="match-result" style={{color: styler}}>
-                    {win.toString()}
+                    {playerMatches.win.toString()}
                 </div>
                 <div className='info-button' onClick={toggleShowInfo}>
                     ...

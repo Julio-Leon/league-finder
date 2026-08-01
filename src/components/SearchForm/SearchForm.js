@@ -20,23 +20,45 @@ export default function ({searchInput, setSearchInput, redirect, setRedirect}) {
         fontColor = 'black'
     }
 
-    const handleInput = e => {
+    const handleInputName = e => {
         e.preventDefault()
-        setSearchInput(e.target.value)
+        setSearchInput({
+            ...searchInput,
+            name: e.target.value
+        })
+        // console.log(searchInput)
     }
+
+    const handleInputTag = e => {
+        e.preventDefault()
+        setSearchInput({
+            ...searchInput,
+            tag: e.target.value
+        })
+        // console.log(searchInput)s
+    }
+
 
     const handleSubmit = e => {
         e.preventDefault()
-        setSearchInput("/" + searchInput)
         setRedirect(true)
     }
     
-    if (redirect) return <Redirect to={searchInput} />
+    if (redirect) return <Redirect to={'/' + searchInput.name + '/' + searchInput.tag} />
 
+
+    //SEARCH INPUTS FOR ACCOUNT
     return (
         <form className="search-form flex-container" onSubmit={handleSubmit}>
-            <label className="search-player-label" htmlFor="search-player" style={{color: fontColor}} >{darkModeData.servers[darkModeData.server]}:</label>
-            <input className="search-player" type="text" id="search-player" placeholder="Player Name:" value={searchInput} onChange={handleInput}/>
+
+            {/* NAME INPUT */}
+            <label className="search-player-label" htmlFor="search-player" style={{color: fontColor}} ></label>
+            <input className="search-player" type="text" id="search-player" placeholder="Player Name:" value={searchInput.name} onChange={handleInputName}/>
+            
+            {/* TAG INPUT */}
+            <label className="search-player-label" htmlFor="tag" style={{color: fontColor}} ></label>
+            <input name='tag' className="search-player" type="text" id="search-player" placeholder="Tag:" value={searchInput.tag} onChange={handleInputTag}/>
+            
             <input type="submit" value="Search" className="search-player-button" style={{backgroundColor: buttonBackgroundColor}} />
         </form>
     )

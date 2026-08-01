@@ -5,7 +5,7 @@ import { RedirectContext } from '../../App';
 import Matches from '../Matches/Matches';
 import DataHeader from '../DataHeader/DataHeader';
 
-require('dotenv').config();
+// require('dotenv').config();
 
 const MY_API_KEY = process.env.REACT_APP_MY_API_KEY
 const API_KEY = "api_key=" + MY_API_KEY
@@ -35,6 +35,7 @@ function MatchGetter(props) {
   
     const player = {
         matches,
+        tag: props.match.params.tag,
         searchPlayer: props.match.params.name,
         puuid,
         id,
@@ -50,17 +51,18 @@ function MatchGetter(props) {
     }
 
     const fetchPlayerData = async () => {
-      // const PLAYER_ENDPOINT = 'http://localhost:4000/'
-      const PLAYER_ENDPOINT = 'https://league-finder-backend.onrender.com/'
+      const PLAYER_ENDPOINT = 'http://localhost:4000/'
+      // const PLAYER_ENDPOINT = 'https://league-finder-backend.onrender.com/'
+      console.log(redirectContext.server + '/' + player.searchPlayer + '/' + player.tag)
       try {
-        const playerResponse = await fetch(PLAYER_ENDPOINT + redirectContext.server + '/' + player.searchPlayer)
+        const playerResponse = await fetch(PLAYER_ENDPOINT + redirectContext.server + '/' + player.searchPlayer + '/' + player.tag)
         const playerData = await playerResponse.json()
         console.log(playerData)
         setId(playerData.id)
         setPuuid(playerData.puuid)
         setSoloQ(playerData.soloQ)
         setMatches(playerData.matches)
-        console.log(playerData.matches)
+        console.log(player.searchPlayer)
       } catch (error) {
         console.error(error)
       }
