@@ -54,8 +54,8 @@ function MatchGetter(props) {
     }
 
     const fetchPlayerData = async () => {
-      const PLAYER_ENDPOINT = 'http://localhost:4000/'
-      // const PLAYER_ENDPOINT = 'https://league-finder-backend.onrender.com/'
+      // const PLAYER_ENDPOINT = 'http://localhost:4000/'
+      const PLAYER_ENDPOINT = 'https://league-finder-backend.onrender.com/'
       console.log(redirectContext.server + '/' + player.searchPlayer + '/' + player.tag)
       try {
         const playerResponse = await fetch(PLAYER_ENDPOINT + redirectContext.server + '/' + player.searchPlayer + '/' + player.tag)
