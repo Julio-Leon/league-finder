@@ -19,23 +19,41 @@
 
 .App {
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  justify-content: flex-start;
+  align-items: stretch;
+  min-height: 100vh;
+  height: auto;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 .header {
   position: relative;
-  width: 99vw;
-  height: 160px;
+  width: 100%;
+  min-height: 0;
+  padding: 18px 24px 14px;
+  box-sizing: border-box;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
+  gap: 12px;
   border-bottom-right-radius: 20px;
   border-bottom-left-radius: 20px;
 }
 
+main {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
 .league-finder {
   font-size: 90px;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
 }
 
 .league-finder:hover {
@@ -43,13 +61,13 @@
 }
 
 .search-form {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
+  position: static;
   width: 450px;
-  height: 40px;
+  max-width: 100%;
+  height: auto;
   justify-content: space-around;
   align-items: center;
+  align-self: flex-end;
 }
 
 .search-form * {
@@ -104,6 +122,7 @@
   background-color: rgba(0, 128, 128, 0.7);
   border-top: black 1px solid;
   position: relative;
+  overflow: hidden;
 }
 
 .data-container {
@@ -116,11 +135,13 @@
 .match-page {
   width: 100%;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(420px, 34vw);
+  grid-template-columns: minmax(0, 1fr) clamp(360px, 32vw, 520px);
   gap: 24px;
   align-items: stretch;
   box-sizing: border-box;
   padding: 0 24px;
+  max-width: 1800px;
+  margin: 0 auto;
 }
 
 .match-main {
@@ -128,6 +149,7 @@
   min-width: 0;
   flex-direction: column;
   gap: 0;
+  overflow: hidden;
 }
 
 .match-main .data-header {
@@ -136,7 +158,7 @@
 
 .match-analysis {
   width: 100%;
-  min-width: 420px;
+  min-width: 0;
   height: calc(100vh - 240px);
   min-height: 58vh;
   overflow: hidden;
@@ -188,6 +210,7 @@
   cursor: ns-resize;
   position: relative;
   flex: 0 0 auto;
+  touch-action: none;
 }
 
 .match-analysis-resizer::before {
@@ -288,6 +311,22 @@
 .match-analysis-chat-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+@media (min-width: 1025px) {
+  .match > * {
+    min-width: 0;
+  }
+
+  .summoner-spells {
+    margin-right: 0;
+  }
+
+  .match-result {
+    margin-left: 0;
+    margin-right: 0;
+    text-align: right;
+  }
 }
 
 .data-header {
@@ -539,6 +578,10 @@
 
 .link-home {
   color: black;
+  margin-left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .player-info-spells {
@@ -552,11 +595,11 @@
 }
 
 .server-picker {
-  width: 22%;
-  position: absolute;
-  justify-content: space-between;
-  right: 50px;
-  top: 170px;
+  width: auto;
+  position: static;
+  justify-content: flex-end;
+  gap: 24px;
+  margin: 6px 24px 10px auto;
 }
 
 .server-picker > * {
@@ -609,12 +652,11 @@ a {
 /* DARK MODE BUTTON(credits to Narender Saini) */
 
 .button-holder {
-  position: absolute;
-  left: 30px;
-  top: 20px;
+  position: static;
   align-items: center;
   justify-content: space-around;
   width: 200px;
+  margin: 10px 0 0 24px;
 }
 
 .toggle-container {
@@ -674,4 +716,365 @@ a {
 .player-empty-item {
   width: 30px;
   background-color: rgba(255, 127, 80, 0.7);
+}
+
+@media (max-width: 1024px) {
+  .match-page {
+    grid-template-columns: 1fr;
+    padding: 0 12px;
+    gap: 14px;
+  }
+
+  .match-main {
+    width: 100%;
+  }
+
+  .match-analysis {
+    width: 100%;
+    min-width: 0;
+    height: 62vh;
+    min-height: 420px;
+  }
+
+  .matches {
+    height: auto;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    min-height: 0;
+    height: auto;
+    padding: 14px 12px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .league-finder {
+    font-size: clamp(48px, 14vw, 64px);
+    text-align: center;
+  }
+
+  .search-form {
+    position: static;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .search-player {
+    width: calc(50% - 4px);
+  }
+
+  .search-player,
+  .search-player-button {
+    height: 40px;
+  }
+
+  .search-player-button {
+    width: 100%;
+  }
+
+  .button-holder {
+    position: static;
+    width: auto;
+    margin: 6px 12px 0;
+    align-self: flex-start;
+  }
+
+  .server-picker {
+    position: static;
+    width: 100%;
+    margin: 4px 0 0;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .server-picker > * {
+    font-size: 18px;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    padding: 0 10px;
+    box-sizing: border-box;
+  }
+
+  .data-container {
+    margin-top: 10px;
+  }
+
+  .match-page {
+    padding: 0;
+    gap: 10px;
+  }
+
+  .data-header {
+    height: auto;
+    min-height: 0;
+    padding: 12px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .data-header * {
+    font-size: clamp(28px, 8vw, 34px);
+  }
+
+  .profile {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .profile-icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .match-container {
+    width: 100%;
+  }
+
+  .match {
+    height: auto;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: 80px 40px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'player spells stats result'
+      'items items stats result';
+    gap: 8px;
+    padding: 8px;
+    align-items: center;
+  }
+
+  .match > * {
+    width: auto;
+    min-width: 0;
+    flex: initial;
+  }
+
+  .player-stats {
+    grid-area: player;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .player-stats img {
+    width: 58px !important;
+    height: auto;
+  }
+
+  .player-KDA {
+    font-size: 12px;
+    margin: 0;
+  }
+
+  .summoner-spells {
+    grid-area: spells;
+    margin-top: 0;
+    margin-right: 0;
+  }
+
+  .summoner-spells > * {
+    line-height: 0;
+  }
+
+  .summoner-spells img {
+    width: 24px !important;
+    height: auto;
+  }
+
+  .items {
+    grid-area: items;
+    width: 100%;
+    max-width: 210px;
+    height: auto;
+    margin-top: 2px;
+  }
+
+  .item {
+    width: 25%;
+    height: auto;
+  }
+
+  .item img {
+    width: 90% !important;
+  }
+
+  .in-game-stats {
+    grid-area: stats;
+    margin-left: 0;
+    align-self: center;
+  }
+
+  .in-game-stats * {
+    font-size: 15px;
+    line-height: 1.15;
+  }
+
+  .participants {
+    display: none;
+  }
+
+  .participant {
+    width: 48%;
+    height: auto;
+    margin-right: 0;
+  }
+
+  .participant-name {
+    font-size: 11px;
+  }
+
+  .match-result {
+    grid-area: result;
+    margin-left: 0;
+    margin-right: 0;
+    text-align: right;
+    align-self: center;
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .info-button {
+    left: auto;
+    right: 8px;
+    top: 8px;
+    font-size: 20px;
+  }
+
+  .complete-match-info {
+    width: 100%;
+    height: auto;
+    margin: 8px 0;
+    gap: 8px;
+  }
+
+  .player {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .player > * {
+    height: auto;
+  }
+
+  .match-analysis {
+    height: 64vh;
+    min-height: 420px;
+  }
+
+  .match-analysis-title {
+    font-size: 24px;
+  }
+
+  .match-analysis-body,
+  .match-analysis-message,
+  .match-analysis-error {
+    font-size: 16px;
+  }
+
+  .match-analysis-chat-message {
+    font-size: 14px;
+  }
+
+  .invalid-name,
+  .searching,
+  .no-player-search {
+    margin: 24px 12px;
+    font-size: 30px;
+  }
+
+  .cors-alert {
+    width: min(92vw, 500px);
+    height: auto;
+    padding: 20px 16px;
+  }
+
+  .cors-failed {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 30px;
+  }
+
+  .install-cors {
+    margin: 0;
+    font-size: 19px;
+  }
+}
+
+@media (max-width: 480px) {
+  .league-finder {
+    font-size: clamp(40px, 14vw, 54px);
+  }
+
+  .dark-mode-text {
+    font-size: 18px;
+  }
+
+  .search-player {
+    width: 100%;
+  }
+
+  .match {
+    grid-template-columns: 70px 34px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'player spells stats result'
+      'items items items result';
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .match > * {
+    min-width: 0;
+  }
+
+  .player-stats img {
+    width: 52px !important;
+  }
+
+  .summoner-spells img {
+    width: 20px !important;
+  }
+
+  .item {
+    width: 24%;
+  }
+
+  .in-game-stats * {
+    font-size: 13px;
+  }
+
+  .participant {
+    width: 100%;
+  }
+
+  .match-result {
+    font-size: 22px;
+  }
+
+  .match-analysis {
+    height: 68vh;
+    min-height: 380px;
+    padding: 14px;
+  }
+
+  .match-analysis-chat-input {
+    min-height: 84px;
+  }
 }

@@ -58,7 +58,7 @@ export default function MatchAnalysis({ analysisData, generateAnalysis, generate
             return undefined
         }
 
-        const handleMouseMove = (event) => {
+        const handlePointerMove = (event) => {
             if (!panelRef.current) {
                 return
             }
@@ -72,20 +72,22 @@ export default function MatchAnalysis({ analysisData, generateAnalysis, generate
             setAnalysisHeight(clampedHeight)
         }
 
-        const handleMouseUp = () => {
+        const handlePointerUp = () => {
             setIsResizing(false)
         }
 
-        window.addEventListener('mousemove', handleMouseMove)
-        window.addEventListener('mouseup', handleMouseUp)
+        window.addEventListener('pointermove', handlePointerMove)
+        window.addEventListener('pointerup', handlePointerUp)
+        window.addEventListener('pointercancel', handlePointerUp)
 
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove)
-            window.removeEventListener('mouseup', handleMouseUp)
+            window.removeEventListener('pointermove', handlePointerMove)
+            window.removeEventListener('pointerup', handlePointerUp)
+            window.removeEventListener('pointercancel', handlePointerUp)
         }
     }, [isResizing])
 
-    const handleResizeMouseDown = (event) => {
+    const handleResizePointerDown = (event) => {
         event.preventDefault()
         setIsResizing(true)
     }
@@ -130,7 +132,7 @@ export default function MatchAnalysis({ analysisData, generateAnalysis, generate
             </div>
             <div
                 className={`match-analysis-resizer ${isResizing ? 'active' : ''}`}
-                onMouseDown={handleResizeMouseDown}
+                onPointerDown={handleResizePointerDown}
                 role="separator"
                 aria-orientation="horizontal"
                 aria-label="Resize analysis and chat sections"
