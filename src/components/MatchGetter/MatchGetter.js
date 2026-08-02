@@ -4,6 +4,8 @@ import { RedirectContext } from '../../App';
 
 import Matches from '../Matches/Matches';
 import DataHeader from '../DataHeader/DataHeader';
+import MatchAnalysis from '../MatchAnalysis/MatchAnalysis';
+import { generateMatchAnalysis } from '../../services/openaiService';
 
 // require('dotenv').config();
 
@@ -30,6 +32,7 @@ function MatchGetter(props) {
     const [puuid, setPuuid] = useState("")
     const [id, setId] = useState("")
     const [soloQ, setSoloQ] = useState("")
+    const [analysisData, setAnalysisData] = useState(null)
 
     const [playerIcon, setPlayerIcon] = useState('')
   
@@ -51,8 +54,8 @@ function MatchGetter(props) {
     }
 
     const fetchPlayerData = async () => {
-      // const PLAYER_ENDPOINT = 'http://localhost:4000/'
-      const PLAYER_ENDPOINT = 'https://league-finder-backend.onrender.com/'
+      const PLAYER_ENDPOINT = 'http://localhost:4000/'
+      // const PLAYER_ENDPOINT = 'https://league-finder-backend.onrender.com/'
       console.log(redirectContext.server + '/' + player.searchPlayer + '/' + player.tag)
       try {
         const playerResponse = await fetch(PLAYER_ENDPOINT + redirectContext.server + '/' + player.searchPlayer + '/' + player.tag)
@@ -62,7 +65,8 @@ function MatchGetter(props) {
         setPuuid(playerData.puuid)
         setSoloQ(playerData.soloQ)
         setMatches(playerData.matches)
-        console.log(player.searchPlayer)
+        setAnalysisData(playerData.analysis || playerData.analysisData || playerData.aiAnalysis || null)
+        console.log(playerData)
       } catch (error) {
         console.error(error)
       }
@@ -147,7 +151,7 @@ function MatchGetter(props) {
               <p></p>
             )
           }
-          <div>
+          <div className="matches-layout flex-container">
             { matches ? (
                 <DataContext.Provider value={{setPlayerIcon}}>
                   <Matches puuid={player.puuid} matches={player.matches} />
@@ -158,6 +162,9 @@ function MatchGetter(props) {
                 </div>
               )
             }
+            { matches ? (
+              <MatchAnalysis analysisData={analysisData} generateAnalysis={generateMatchAnalysis} />
+            ) : null }
           </div>
       </div>
     )

@@ -10,13 +10,11 @@ export default function PlayerItems({items}) {
         }
     });
 
-    console.log(itemsList)
-
     return (
         <div className='player-items flex-container'>
             {
                 itemsList.map((item, i) => {
-                    return item > 0 ? <PlayerItem key={i} item={item}/> : <div className='player-items'><div className="player-empty-item"></div></div>
+                    return item > 0 ? <PlayerItem key={i} item={item}/> : <div key={i} className='player-items'><div className="player-empty-item"></div></div>
                 })
             }
         </div>

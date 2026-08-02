@@ -14,7 +14,7 @@ export default function Items({items}) {
         <>
             {
                 itemsList.map((item, i) => {
-                    return item > 0 ? <Item key={i} item={item}/> : <div className='item'><div className="empty-item"></div></div>
+                    return item > 0 ? <Item key={i} item={item}/> : <div key={i} className='item'><div className="empty-item"></div></div>
                 })
             }
         </>
