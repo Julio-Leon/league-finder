@@ -12,8 +12,8 @@ const summonerSpellMap = {
 
 export default function PlayerSummonerSpells({summoner1, summoner2}) {
 
-    const imgPath1 = `./assets/summonerspells/${summonerSpellMap[summoner1]}.png`
-    const imgPath2 = `./assets/summonerspells/${summonerSpellMap[summoner2]}.png`
+    const imgPath1 = `https://ddragon.leagueoflegends.com/cdn/16.15.1/img/spell/${summonerSpellMap[summoner1]}.png`
+    const imgPath2 = `https://ddragon.leagueoflegends.com/cdn/16.15.1/img/spell/${summonerSpellMap[summoner2]}.png`
 
     return (
         <>

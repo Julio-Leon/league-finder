@@ -1,0 +1,198 @@
+/* Overrides: modern, minimal, accessible UI styles
+   These styles are loaded after legacy styles to improve spacing, hierarchy,
+   buttons, empty/loading/error states, accessibility and responsiveness.
+   They do not change functionality; they only restyle existing classes.
+*/
+
+/* Utility */
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* App container adjustments */
+.App {
+  min-height: 100vh; /* avoid 100vh cropping on mobile */
+  padding: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* Header: responsive and centered */
+.header {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  background: transparent; /* keep semantic control */
+}
+
+.league-finder {
+  font-size: clamp(24px, 4.8vw, 48px);
+  margin: 0;
+  line-height: 1;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Search form: make flexible and responsive */
+.search-form {
+  position: static !important;
+  width: 100%;
+  max-width: 560px;
+  height: auto !important;
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.search-form input[type="text"] {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Inputs: unified modern style */
+input[type="text"], input[type="search"], input[type="submit"], textarea, select {
+  height: 40px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  color: var(--text-primary);
+  font-size: var(--type-body);
+  transition: box-shadow var(--motion) var(--ease-standard), transform var(--motion) var(--ease-standard);
+}
+
+input::placeholder, textarea::placeholder { color: var(--text-muted); }
+
+input:focus, textarea:focus, select:focus {
+  box-shadow: 0 0 0 4px rgba(30,144,255,0.12);
+  border-color: var(--color-primary-500);
+}
+
+/* Buttons: base and variants */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+  height: 40px;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: var(--type-body);
+  transition: transform var(--motion) var(--ease-standard), box-shadow var(--motion) var(--ease-standard), background-color var(--motion) var(--ease-standard);
+}
+
+.btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.btn-primary { background: var(--color-primary-500); color: var(--neutral-0); box-shadow: var(--shadow-1); }
+.btn-primary:hover { background: var(--color-primary-700); transform: translateY(-1px); box-shadow: var(--shadow-2); }
+
+.btn-secondary { background: transparent; color: var(--text-primary); border: 1px solid var(--border); }
+.btn-secondary:hover { background: var(--surface-2); }
+
+.btn-ghost { background: transparent; color: var(--text-primary); }
+.btn-ghost:hover { background: var(--surface-2); }
+
+/* Match/list card improvements */
+.matches {
+  width: 100%;
+  max-width: 1200px;
+  height: auto !important;
+  background: transparent;
+  overflow: visible !important;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+}
+
+.match {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  align-items: center;
+  gap: var(--space-4);
+  display: flex;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-1);
+}
+
+.match > * { width: auto !important; flex: 0 1 auto; }
+
+/* Participants list: change to grid for predictable spacing */
+.participants { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: var(--space-3); width: 40%; }
+.participant { margin: 0; padding: var(--space-2); border-radius: var(--radius-sm); background: transparent; }
+.participant:hover { background: var(--surface-2); transform: translateX(2px); }
+
+/* Data header: compact and aligned */
+.data-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  height: auto !important;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.profile-icon { border-radius: 8px; border: none; box-shadow: var(--shadow-1); }
+
+/* Empty / Loading / Error states */
+.empty-state, .loading-state, .error-state {
+  width: 100%;
+  max-width: 720px;
+  margin: var(--space-6) auto;
+  padding: var(--space-5);
+  border-radius: var(--radius-md);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-1);
+  text-align: center;
+}
+
+.loading-state { display: flex; align-items: center; justify-content: center; gap: var(--space-3); }
+.loading-spinner { width: 36px; height: 36px; border-radius: 50%; border: 4px solid var(--surface-2); border-top-color: var(--color-primary-500); animation: spin 1s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error-state { color: var(--color-error-500); }
+
+/* Buttons inside forms: style input[type=submit] to match buttons */
+input[type="submit"].search-player-button, .search-player-button { appearance: none; -webkit-appearance: none; }
+.search-player-button { padding: 0 var(--space-4); height: 40px; border-radius: var(--radius-md); }
+
+/* Accessibility: ensure interactive elements are keyboard-focusable */
+.participant[tabindex="0"], .info-button[tabindex="0"], .btn[tabindex="0"] { outline: none; }
+.participant:focus-visible, .info-button:focus-visible, .btn:focus-visible { box-shadow: 0 0 0 4px rgba(30,144,255,0.12); }
+
+/* Footer tweaks */
+footer { padding: var(--space-4); text-align: center; }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .header { flex-direction: column; align-items: stretch; gap: var(--space-3); }
+  .participants { width: 100%; grid-template-columns: 1fr 1fr; }
+  .data-header { flex-direction: column; align-items: start; }
+  .matches { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  .participants { grid-template-columns: 1fr; }
+  .league-finder { font-size: clamp(20px, 8vw, 32px); }
+  .search-form { justify-content: stretch; }
+}
+
+.item {
+    width: 70px;
+    height: 70px;
+    margin: 0;
+    padding: 0;
+}

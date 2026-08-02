@@ -17,8 +17,8 @@ export default function SummonerSpells({summonerSpells}) {
 
     return (
         <>
-            <div><img src={sum1ImgPath} width='55px' alt="" /></div>
-            <div><img src={sum2ImgPath} width='55px' alt="" /></div>
+            <div><img src={sum1ImgPath} width='30%' alt="" /></div>
+            <div><img src={sum2ImgPath} width='30%' alt="" /></div>
         </>
     )
 }

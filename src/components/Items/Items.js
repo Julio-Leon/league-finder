@@ -1,11 +1,20 @@
 import Item from '../Item/Item'
 
 export default function Items({items}) {
+
+    const itemsList = []
+
+    items.forEach(item => {
+        if (!itemsList.includes(item)) {
+            return itemsList.push(item)
+        }
+    });
+
     return (
         <>
             {
-                items.map((item, i) => {
-                    return <Item key={i} item={item}/>
+                itemsList.map((item, i) => {
+                    return item > 0 ? <Item key={i} item={item}/> : <div className='item'><div className="empty-item"></div></div>
                 })
             }
         </>

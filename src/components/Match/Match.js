@@ -91,8 +91,6 @@ export default function Match({puuid, match}) {
         players.push(participantData)
     })
 
-    console.log(players)
-
     return (
         <div className="match-container">
             <div className="match flex-container">

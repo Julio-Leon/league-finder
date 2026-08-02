@@ -1,6 +1,6 @@
-/* * {
-  border: 1px solid black;
-} */
+@import './globals.css';
+
+/* Project-specific overrides and legacy rules kept below. */
 
 @font-face {
   font-family: "font";
@@ -8,8 +8,10 @@
 }
 
 * {
-  font-family: "font";
+  font-family: var(--font-sans);
 }
+
+/* overrides.css will be imported at the end so it can override legacy rules */
 
 .flex-container {
   display: flex;
@@ -168,6 +170,7 @@
 
 .player-KDA {
   font-size: 25px;
+  margin: 1%;
 }
 
 .in-game-stats {
@@ -478,4 +481,17 @@ a {
   font-size: 22px;
   margin-right: 5px;
   margin-top: 5px;
+}
+
+/* Import overrides last so they override legacy rules */
+/* @import './overrides.css'; */
+
+.empty-item {
+  width: 70%;
+  background-color: rgba(255, 127, 80, 0.7);
+}
+
+.player-empty-item {
+  width: 30px;
+  background-color: rgba(255, 127, 80, 0.7);
 }

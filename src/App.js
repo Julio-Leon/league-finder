@@ -37,7 +37,7 @@ function App() {
     asia: 'Asia'
   }
 
-  const [darkModeOn, setDarkModeOn] = useState(false)
+  const [darkModeOn, setDarkModeOn] = useState(true)
   
   const [searchInput, setSearchInput] = useState({name: '', tag: ''})
   const [redirect, setRedirect] = useState(false)

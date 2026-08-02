@@ -1,11 +1,22 @@
 import PlayerItem from "../PlayerItem/PlayerItem"
 
 export default function PlayerItems({items}) {
+
+    const itemsList = []
+
+    items.forEach(item => {
+        if (!itemsList.includes(item)) {
+            return itemsList.push(item)
+        }
+    });
+
+    console.log(itemsList)
+
     return (
         <div className='player-items flex-container'>
             {
-                items.map((item, i) => {
-                    return <PlayerItem key={i} item={item} />
+                itemsList.map((item, i) => {
+                    return item > 0 ? <PlayerItem key={i} item={item}/> : <div className='player-items'><div className="player-empty-item"></div></div>
                 })
             }
         </div>

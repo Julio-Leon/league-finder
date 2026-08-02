@@ -3,7 +3,7 @@ export default function PlayerStats({champion , kdaRatio}) {
     return (
         <>  
             <div className="champion">
-                <img src={`https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion}_0.jpg`} width='100px' alt="" />
+                <img src={`https://ddragon.leagueoflegends.com/cdn/16.15.1/img/champion/${champion}.png`} width='100px' alt="" />
             </div>
             <div className="player-KDA">
                 {kdaRatio[0]}/{kdaRatio[1]}/{kdaRatio[2]}
