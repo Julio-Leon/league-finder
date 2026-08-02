@@ -5,7 +5,7 @@ import { RedirectContext } from '../../App';
 import Matches from '../Matches/Matches';
 import DataHeader from '../DataHeader/DataHeader';
 import MatchAnalysis from '../MatchAnalysis/MatchAnalysis';
-import { generateMatchAnalysis } from '../../services/openaiService';
+import { generateMatchAnalysis, generateMatchAnalysisReply } from '../../services/openaiService';
 
 // require('dotenv').config();
 
@@ -54,8 +54,8 @@ function MatchGetter(props) {
     }
 
     const fetchPlayerData = async () => {
-      // const PLAYER_ENDPOINT = 'http://localhost:4000/'
-      const PLAYER_ENDPOINT = 'https://league-finder-backend.onrender.com/'
+      const PLAYER_ENDPOINT = 'http://localhost:4000/'
+      // const PLAYER_ENDPOINT = 'https://league-finder-backend.onrender.com/'
       console.log(redirectContext.server + '/' + player.searchPlayer + '/' + player.tag)
       try {
         const playerResponse = await fetch(PLAYER_ENDPOINT + redirectContext.server + '/' + player.searchPlayer + '/' + player.tag)
@@ -145,14 +145,15 @@ function MatchGetter(props) {
 
     return (
         <div className="data-container flex-container">
-          { matches ? (
-              <DataHeader playerName={player.searchPlayer} playerRank={soloQ.rank} playerTier={soloQ.tier} playerLeaguePoints={soloQ.leaguePoints} playerIcon={playerIcon} />
-            ) : (
-              <p></p>
-            )
-          }
-          <div className="matches-layout flex-container">
-            { matches ? (
+          <div className="match-page flex-container">
+            <div className="match-main flex-container">
+              { matches ? (
+                  <DataHeader playerName={player.searchPlayer} playerRank={soloQ.rank} playerTier={soloQ.tier} playerLeaguePoints={soloQ.leaguePoints} playerIcon={playerIcon} />
+                ) : (
+                  <p></p>
+                )
+              }
+              { matches ? (
                 <DataContext.Provider value={{setPlayerIcon}}>
                   <Matches puuid={player.puuid} matches={player.matches} />
                 </DataContext.Provider>
@@ -162,8 +163,13 @@ function MatchGetter(props) {
                 </div>
               )
             }
+            </div>
             { matches ? (
-              <MatchAnalysis analysisData={analysisData} generateAnalysis={generateMatchAnalysis} />
+              <MatchAnalysis
+                analysisData={analysisData}
+                generateAnalysis={generateMatchAnalysis}
+                generateReply={generateMatchAnalysisReply}
+              />
             ) : null }
           </div>
       </div>

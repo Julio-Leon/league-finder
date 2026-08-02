@@ -19,6 +19,34 @@ function buildAnalysisPrompt(analysisData) {
   ].join('\n')
 }
 
+function buildChatPrompt(analysisData, analysisText, conversation, userMessage) {
+  const conversationText = Array.isArray(conversation)
+    ? conversation
+        .map((message) => `${message.role.toUpperCase()}: ${message.content}`)
+        .join('\n')
+    : ''
+
+  return [
+    'You are a helpful League of Legends analyst continuing a conversation about a single match.',
+    'Use the provided analysis context, the original raw match analysis data, and the prior conversation.',
+    'Do not invent details that are not supported by the data or the previous messages.',
+    'If the user asks something the data cannot answer, say that clearly.',
+    'Keep the response human readable, practical, and concise.',
+    '',
+    'Existing human-readable analysis:',
+    analysisText || '(none yet)',
+    '',
+    'Raw analysis data:',
+    JSON.stringify(analysisData, null, 2),
+    '',
+    'Conversation so far:',
+    conversationText || '(none)',
+    '',
+    'Latest user message:',
+    userMessage,
+  ].join('\n')
+}
+
 function extractOpenAIText(responseJson) {
   if (typeof responseJson?.output_text === 'string' && responseJson.output_text.trim()) {
     return responseJson.output_text.trim()
@@ -89,4 +117,45 @@ export async function generateMatchAnalysis(analysisData, options = {}) {
   return analysisText
 }
 
-export { buildAnalysisPrompt, extractOpenAIText }
+export async function generateMatchAnalysisReply(analysisData, analysisText, conversation, userMessage, options = {}) {
+  if (!OPENAI_API_KEY) {
+    throw new Error('Missing OpenAI API key. Set REACT_APP_OPENAI_API_KEY before calling generateMatchAnalysisReply().')
+  }
+
+  if (!analysisData) {
+    throw new Error('Missing analysis data.')
+  }
+
+  if (!userMessage || !userMessage.trim()) {
+    throw new Error('Missing chat message.')
+  }
+
+  const response = await fetch('https://api.openai.com/v1/responses', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: options.model || OPENAI_MODEL,
+      input: buildChatPrompt(analysisData, analysisText, conversation, userMessage.trim()),
+      temperature: options.temperature ?? 0.3,
+    }),
+  })
+
+  if (!response.ok) {
+    const errorBody = await response.text()
+    throw new Error(`OpenAI request failed with status ${response.status}: ${errorBody}`)
+  }
+
+  const responseJson = await response.json()
+  const replyText = extractOpenAIText(responseJson)
+
+  if (!replyText) {
+    throw new Error('OpenAI returned an empty chat response.')
+  }
+
+  return replyText
+}
+
+export { buildAnalysisPrompt, buildChatPrompt, extractOpenAIText }

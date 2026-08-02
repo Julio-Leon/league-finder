@@ -84,18 +84,12 @@
 }
 
 .matches {
-  width: 60vw;
+  width: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
   height: 58vh;
   background-color: rgba(95, 158, 160, 0.295);
-}
-
-.matches-layout {
-  width: 100%;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 24px;
+  box-sizing: border-box;
 }
 
 .data-container * {
@@ -116,25 +110,56 @@
   flex-direction: column;
   margin-top: 40px;
   align-items: center;
+  width: 100%;
+}
+
+.match-page {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(420px, 34vw);
+  gap: 24px;
+  align-items: stretch;
+  box-sizing: border-box;
+  padding: 0 24px;
+}
+
+.match-main {
+  width: 100%;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0;
+}
+
+.match-main .data-header {
+  width: 100%;
 }
 
 .match-analysis {
-  width: 320px;
+  width: 100%;
+  min-width: 420px;
+  height: calc(100vh - 240px);
   min-height: 58vh;
-  max-height: 58vh;
-  overflow-y: auto;
+  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.45);
   border: 1px solid rgba(255, 127, 80, 0.7);
   border-radius: 12px;
   padding: 18px;
   flex-direction: column;
   gap: 14px;
+  box-sizing: border-box;
+  justify-self: stretch;
 }
 
 .match-analysis-title {
   font-size: 26px;
   font-weight: bold;
   color: rgba(255, 127, 80, 0.95);
+}
+
+.match-analysis-summary {
+  overflow-y: auto;
+  min-height: 90px;
+  padding-right: 4px;
 }
 
 .match-analysis-body,
@@ -145,12 +170,124 @@
   white-space: pre-wrap;
 }
 
+.match-analysis-body {
+  padding-bottom: 2px;
+}
+
 .match-analysis-error {
   color: #ffb3b3;
 }
 
 .match-analysis-message {
   color: #f0d27a;
+}
+
+.match-analysis-resizer {
+  height: 10px;
+  margin: 2px 0;
+  cursor: ns-resize;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.match-analysis-resizer::before {
+  content: '';
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: rgba(255, 127, 80, 0.75);
+  border-radius: 999px;
+}
+
+.match-analysis-resizer.active::before,
+.match-analysis-resizer:hover::before {
+  background: rgba(255, 183, 134, 1);
+}
+
+.match-analysis-chat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+  margin-top: auto;
+}
+
+.match-analysis-chat-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: rgba(255, 127, 80, 0.95);
+}
+
+.match-analysis-chat-log {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 4px;
+}
+
+.match-analysis-chat-empty {
+  font-size: 15px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.match-analysis-chat-message {
+  font-size: 15px;
+  line-height: 1.45;
+  padding: 10px 12px;
+  border-radius: 12px;
+  white-space: pre-wrap;
+}
+
+.match-analysis-chat-message.user {
+  background-color: rgba(255, 255, 255, 0.12);
+  align-self: flex-end;
+}
+
+.match-analysis-chat-message.assistant {
+  background-color: rgba(255, 127, 80, 0.14);
+  align-self: flex-start;
+}
+
+.match-analysis-chat-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.match-analysis-chat-input {
+  resize: none;
+  width: 100%;
+  min-height: 72px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 127, 80, 0.45);
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: white;
+  box-sizing: border-box;
+}
+
+.match-analysis-chat-button {
+  align-self: flex-end;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 16px;
+  background-color: rgba(255, 127, 80, 0.85);
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.match-analysis-chat-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .data-header {
